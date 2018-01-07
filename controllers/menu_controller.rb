@@ -13,7 +13,8 @@ class MenuController
         puts "2 - Create an entry"
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
-        puts "5 - Exit"
+        puts "5 - View specific entry"
+        puts "6 - Exit"
         print "Enter your selection: "
     
         selection = gets.to_i
@@ -35,6 +36,9 @@ class MenuController
                 system "clear"
                 read_csv
             when 5
+                system "clear"
+                entry_number
+            when 6
                 puts "Good-bye!"
                 exit(0)
             else
@@ -77,6 +81,53 @@ class MenuController
     end
     
     def read_csv
+    end
+    
+    def entry_number
+        puts "Please enter an entry number"
+        
+        selection = gets.to_i - 1
+        system "clear"
+        if address_book.entries[selection] != nil && selection >= 0 && selection <= address_book.entries.length
+            p address_book.entries[selection]
+            puts "If you would like to select another entry, please enter - y"
+            puts "If you would like to return to the main menu, enter - n"
+            
+            selection = gets.chomp
+            
+            case selection
+                when "y"
+                    system "clear"
+                    entry_number
+                when "n"
+                    system "clear"
+                    main_menu
+                    exit(0)
+                else
+                    system "clear"
+                    p "Invalid input, returning to the main menu"
+                    main_menu
+            end
+        else
+            puts "Invalid input or specified entry does not exist. To try again, please enter - y"
+            puts "Or if you would like to return to the main menu, enter - n"
+            
+            selection = gets.chomp
+            
+            case selection
+                when "y"
+                    system "clear"
+                    entry_number
+                when "n"
+                    system "clear"
+                    main_menu
+                    exit(0)
+                else
+                    system "clear"
+                    p "Invalid input, returning to the main menu"
+                    main_menu
+            end
+        end
     end
     
     def entry_submenu(entry)
