@@ -14,7 +14,8 @@ class MenuController
         puts "3 - Search for an entry"
         puts "4 - Import entries from a CSV"
         puts "5 - View specific entry"
-        puts "6 - Exit"
+        puts "6 - Nuke all entries"
+        puts "7 - Exit"
         print "Enter your selection: "
     
         selection = gets.to_i
@@ -39,6 +40,10 @@ class MenuController
                 system "clear"
                 entry_number
             when 6
+                system "clear"
+                address_book.entries.clear
+                main_menu
+            when 7
                 puts "Good-bye!"
                 exit(0)
             else
@@ -211,7 +216,6 @@ class MenuController
         puts "e - edit this entry"
         puts "m - return to main menu"
         selection = gets.chomp
-        
         case selection
             when "d"
                 system "clear"
